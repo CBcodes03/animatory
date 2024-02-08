@@ -1,22 +1,26 @@
-a='''data = ["6 OVA","7 Special","8 TV"]
-rs=["TV","OVA","Movie","TV Special","Special"]
-for j in data:
-    for i in rs:
-        if i in j:
-            data[(data.index(j))]=j[0:(len(j)-len(i)-1)]
-            print(j[0:(len(j)-len(i))])
-            #data[data.index(j)]='j[0:(len(j)-len(i))]'
-            #print(j[0:(len(j)-len(i))])
-print(data)'''
 import re
+def check_pattern_in_string(pattern, text):
+    if re.match(pattern, text) != None:
+        return True
+    else:
+        return False
 
-# Sample list of strings
-data = ["6 OVA", "7 TV", "10 Movie", "5 TV", "4 OVA", "Other String"]
+l=[]
+for i in range(2,20):
+    l.append(str(i))
+    l.append("a")
+    l.append("b")
+    l.append(f"{i} / {i**2}")
+    l.append("x")
 
-# Regular expression pattern to match substrings to be removed
-pattern = re.compile(r'\b(?:OVA|TV|Movie)\b')
-
-# Remove substrings from the list of strings
-filtered_data = [pattern.sub('', item) for item in data]
-
-print(filtered_data)
+print(l)
+pattern = r'^(-|\d+) / \d+$'
+print(20*"#")
+res=[]
+for i in range(len(l)):
+    if check_pattern_in_string(pattern,l[i]):
+        print(l[i])
+        res.append(l[i-2])
+        res.append(l[i-1])
+        res.append(l[i+1])
+print(res)
